@@ -48,15 +48,41 @@ describe('AuthorController', () => {
     });
   });
 
-  describe('findAll', () => {
-    it('should call authorService.findAll and return the result', async () => {
-      const expectedResult = [
-        { _id: 'mockGeneratedId', name: 'Test Author' },
-        { _id: 'mockGeneratedId2', name: 'Test Author 2' },
-      ];
-      mockAuthorService.findAll.mockResolvedValue(expectedResult);
-      const result = await controller.findAll();
-      expect(mockAuthorService.findAll).toHaveBeenCalled();
+  describe('findOne', () => {
+    it('should call authorService.findOne with the correct id and return the result', async () => {
+      const id = '66350a4f5b8d3e8f5a1b2c3d';
+      const expectedResult = { _id: id, name: 'Test Author' };
+      mockAuthorService.findOne.mockResolvedValue(expectedResult);
+      // eslint-disable-next-line @typescript-eslint/await-thenable
+      const result = await controller.findOne(id);
+      expect(mockAuthorService.findOne).toHaveBeenCalledWith(id);
+      expect(result).toEqual(expectedResult);
+    });
+  });
+
+  describe('update', () => {
+    it('should call authorService.update with the correct id and return the result', async () => {
+      const id = '66350a4f5b8d3e8f5a1b2c3d';
+      const updateDto = { name: 'Updated Author' };
+      const expectedResult = { _id: id, ...updateDto };
+      mockAuthorService.update.mockResolvedValue(expectedResult);
+
+      const result = await controller.update(id, updateDto);
+
+      expect(mockAuthorService.update).toHaveBeenCalledWith(id, updateDto);
+      expect(result).toEqual(expectedResult);
+    });
+  });
+
+  describe('remove', () => {
+    it('should call authorService.remove with the correct id and return the result', async () => {
+      const id = '66350a4f5b8d3e8f5a1b2c3d';
+      const expectedResult = { deletedCount: 0 };
+      mockAuthorService.remove.mockResolvedValue(expectedResult);
+
+      const result = await controller.remove(id);
+
+      expect(mockAuthorService.remove).toHaveBeenCalledWith(id);
       expect(result).toEqual(expectedResult);
     });
   });
