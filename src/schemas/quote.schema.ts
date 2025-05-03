@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 import * as mongoose from 'mongoose';
 import { Tag } from './tag.schema';
+import { Author } from './author.schema';
 
 export type QuoteDocument = HydratedDocument<Quote>;
 
@@ -10,8 +11,8 @@ export class Quote {
   @Prop({ required: true })
   text: string;
 
-  @Prop({ required: true })
-  author: string;
+  @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'Author' })
+  author: Author;
 
   @Prop()
   source?: string;
