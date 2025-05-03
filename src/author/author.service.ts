@@ -1,11 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAuthorDto } from './dto/create-author.dto';
 import { UpdateAuthorDto } from './dto/update-author.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Author } from './../schemas/author.schema';
+
 
 @Injectable()
 export class AuthorService {
-  create(createAuthorDto: CreateAuthorDto) {
-    return 'This action adds a new author';
+  constructor(
+    @InjectModel('Author') private readonly authorModel: Model<Author>,
+  ) {}
+  async create(createAuthorDto: CreateAuthorDto) {
+    const author = new this.authorModel(createAuthorDto);
+    return await author.save();
   }
 
   findAll() {
@@ -16,8 +24,13 @@ export class AuthorService {
     return `This action returns a #${id} author`;
   }
 
-  update(id: number, updateAuthorDto: UpdateAuthorDto) {
-    return `This action updates a #${id} author`;
+  async update(id: number, updateAuthorDto: UpdateAuthorDto) {
+    const author = await this.authorModel
+      .findByIdAndUpdate(id, updateAuthorDto, {
+        new: true,
+      })
+      .exec();
+    return author;
   }
 
   remove(id: number) {
