@@ -5,7 +5,6 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Author } from './../schemas/author.schema';
 
-
 @Injectable()
 export class AuthorService {
   constructor(
@@ -17,14 +16,14 @@ export class AuthorService {
   }
 
   findAll() {
-    return `This action returns all author`;
+    return this.authorModel.find().exec();
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return `This action returns a #${id} author`;
   }
 
-  async update(id: number, updateAuthorDto: UpdateAuthorDto) {
+  async update(id: string, updateAuthorDto: UpdateAuthorDto) {
     const author = await this.authorModel
       .findByIdAndUpdate(id, updateAuthorDto, {
         new: true,
@@ -33,7 +32,7 @@ export class AuthorService {
     return author;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} author`;
+  remove(id: string) {
+    return this.authorModel.findByIdAndDelete(id).exec();
   }
 }
