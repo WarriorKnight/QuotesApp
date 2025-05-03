@@ -16,9 +16,9 @@ export class CreateAuthorDto {
 
   @IsDateString()
   @IsOptional()
-  readonly birthDate?: string; // Use string for DTO input, can be transformed to Date in service
+  readonly birthDate?: string;
 
   @IsDateString()
   @IsOptional()
-  readonly deathDate?: string; // Use string for DTO input, can be transformed to Date in service
+  readonly deathDate?: string;
 }
