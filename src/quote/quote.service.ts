@@ -1,26 +1,37 @@
 import { Injectable } from '@nestjs/common';
 import { CreateQuoteDto } from './dto/create-quote.dto';
 import { UpdateQuoteDto } from './dto/update-quote.dto';
+import { Quote } from './../schemas/quote.schema';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class QuoteService {
-  create(createQuoteDto: CreateQuoteDto) {
-    return 'This action adds a new quote';
+  constructor(
+    @InjectModel('Quote') private readonly quoteModel: Model<Quote>,
+  ) {}
+
+  async create(CreateQuoteDto: CreateQuoteDto) {
+    const author = new this.quoteModel(CreateQuoteDto);
+    return await author.save();
   }
 
   findAll() {
-    return `This action returns all quote`;
+    return this.quoteModel.find().exec();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} quote`;
+  findOne(id: string) {
+    return this.quoteModel.findById(id).exec();
   }
 
-  update(id: number, updateQuoteDto: UpdateQuoteDto) {
-    return `This action updates a #${id} quote`;
+  async update(id: string, updateQuoteDto: UpdateQuoteDto) {
+    const updatedQuote = await this.quoteModel
+      .findByIdAndUpdate(id, updateQuoteDto, { new: true })
+      .exec();
+    return updatedQuote;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} quote`;
+  remove(id: string) {
+    return this.quoteModel.findByIdAndDelete(id).exec();
   }
 }
