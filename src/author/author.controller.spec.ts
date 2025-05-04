@@ -50,7 +50,7 @@ describe('AuthorController', () => {
 
   describe('findOne', () => {
     it('should call authorService.findOne with the correct id and return the result', async () => {
-      const id = '66350a4f5b8d3e8f5a1b2c3d';
+      const id = 'mockId';
       const expectedResult = { _id: id, name: 'Test Author' };
       mockAuthorService.findOne.mockResolvedValue(expectedResult);
       // eslint-disable-next-line @typescript-eslint/await-thenable
@@ -62,7 +62,7 @@ describe('AuthorController', () => {
 
   describe('update', () => {
     it('should call authorService.update with the correct id and return the result', async () => {
-      const id = '66350a4f5b8d3e8f5a1b2c3d';
+      const id = 'mockId';
       const updateDto = { name: 'Updated Author' };
       const expectedResult = { _id: id, ...updateDto };
       mockAuthorService.update.mockResolvedValue(expectedResult);
@@ -76,7 +76,7 @@ describe('AuthorController', () => {
 
   describe('remove', () => {
     it('should call authorService.remove with the correct id and return the result', async () => {
-      const id = '66350a4f5b8d3e8f5a1b2c3d';
+      const id = 'mockId';
       const expectedResult = { deletedCount: 0 };
       mockAuthorService.remove.mockResolvedValue(expectedResult);
 

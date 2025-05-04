@@ -20,7 +20,7 @@ export class AuthorService {
   }
 
   findOne(id: string) {
-    return `This action returns a #${id} author`;
+    return this.authorModel.findById(id).exec();
   }
 
   async update(id: string, updateAuthorDto: UpdateAuthorDto) {
