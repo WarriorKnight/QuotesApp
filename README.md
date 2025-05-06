@@ -6,7 +6,7 @@ The Quotes App is a simple web application designed to fetch and display random 
 
 ## Disclosure
 
-This project is Work-In-Progress. Currently the testing is done on all services and controllers.
+This project is a Work-In-Progress (WIP). At present, testing has been implemented for all services and controllers.
 
 ## To Do List
 - [ ] Add more tests
