@@ -1,0 +1,43 @@
+body {
+  background-color: #fafaeb;
+  font-family: "Source Serif 4", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  color: #04162e;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+
+  /* Add semi-transparent overlay with the grainy texture */
+  background-image: 
+    linear-gradient(rgba(250, 250, 235, 0.95), rgba(250, 250, 235, 0.95)), /* Semi-transparent overlay */
+    url('./assets/grain2.jpg'); /* Grainy texture image */
+  background-size: cover;
+  background-repeat: repeat;
+}
+
+.card {
+  padding: 20px;
+  max-width: 600px; /* Set a maximum width for the card */
+  /* background-color: white; */
+  /* border-radius: 8px; */
+  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+}
+
+.quote {
+  font-size: 1.5rem; /* Larger font size for the quote */
+  font-style: italic; /* Italicize the quote */
+  margin-bottom: 10px; /* Add spacing below the quote */
+  color: #333; /* Darker text color for readability */
+  text-align: center; /* Center-align the text */
+}
+
+.author {
+  font-size: 1rem; /* Smaller font size for the author */
+  font-weight: bold; /* Make the author's name bold */
+  color: #555; /* Slightly lighter color for contrast */
+  text-align: center; /* Center-align the text */
+}
