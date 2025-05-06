@@ -11,13 +11,23 @@ export class Quote {
   @Prop({ required: true })
   text: string;
 
-  @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'Author' })
+  @Prop({
+    required: false,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Author',
+  })
   author: Author;
+
+  @Prop({ required: false })
+  authorName?: string;
 
   @Prop()
   source?: string;
 
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag' }] })
+  @Prop({
+    required: false,
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag' }],
+  })
   tags?: Tag[];
 }
 

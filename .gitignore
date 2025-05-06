@@ -3,6 +3,8 @@
 /node_modules
 /build
 
+.py
+
 # Logs
 logs
 *.log
