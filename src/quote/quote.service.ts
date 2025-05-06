@@ -31,6 +31,23 @@ export class QuoteService {
     return updatedQuote;
   }
 
+  async findRandom() {
+    const count = await this.quoteModel.countDocuments();
+    const random = Math.floor(Math.random() * count);
+    const randomQuote = await this.quoteModel.findOne().skip(random).exec();
+
+    if (randomQuote && randomQuote.author) {
+      const author = await this.quoteModel.db
+        .collection('authors')
+        .findOne({ _id: randomQuote.author });
+      if (author) {
+        randomQuote.authorName = author.name; // Assign the author's name to authorName
+      }
+    }
+
+    return randomQuote; // Return the modified randomQuote
+  }
+
   remove(id: string) {
     return this.quoteModel.findByIdAndDelete(id).exec();
   }
