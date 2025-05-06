@@ -12,7 +12,8 @@ export class CreateQuoteDto {
   readonly text: string;
 
   @IsMongoId()
-  @IsNotEmpty()
+  // @IsNotEmpty()
+  @IsOptional()
   readonly author: string;
 
   @IsString()
