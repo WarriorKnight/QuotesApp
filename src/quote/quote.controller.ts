@@ -24,11 +24,16 @@ export class QuoteController {
   findAll() {
     return this.quoteService.findAll();
   }
+  @Get('random')
+  findRandom() {
+    return this.quoteService.findRandom();
+  }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.quoteService.findOne(id);
   }
+
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateQuoteDto: UpdateQuoteDto) {
